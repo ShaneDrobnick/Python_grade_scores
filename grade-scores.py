@@ -1,6 +1,7 @@
 from Name import name
 import sys,  os.path
-
+# Made By Shane Drobnick as a Challange to do task in Python from Original C# version
+#2/9/17
 def ProgramReadFile():
     names = []
     #Check read File exists
@@ -29,25 +30,18 @@ def ProgramReadFile():
         #adding to name object
         n = name(str(line[1]), str(line[0]), str(line[2]))
         names.append(n)
-        #for l in line:
-        #    print(l)
-    #print(line,  end='') # prints line without return
+
     infile.close()
 
     return names
 
 def WriteFile(list):
-    #need to send file name add ending and get dir it came from to output
-    
-    #print(sys.argv[1])
-    #splitonfiletype = sys.argv[1]
-    #splitonfiletype = splitonfiletype.split('.')
+
     path,  filename = os.path.split(sys.argv[1])
     filename = filename.split('.')
-    #print(filename)
-    #print(path)
+
     filenamefull = path + filename[0] + '_python_graded.txt'
-    #file = open('e:\\Python_graded.txt',  'w')
+
     
     #Check file can be written too
     try:
@@ -67,7 +61,10 @@ def WriteFile(list):
     print('Finished: created '+ filename[0] + '_python_graded.txt' )
     return
 
-# Will sort list by score    
+# Will sort list of Name Objects
+# firstorlast = None  - sort by score
+# firstorlast = 1 - sort by Surname
+# firstorlast = 2 - sort by first name
 def SortNames(sortlist,  firstorlast):
     if firstorlast == None:
         for i in range(0,  len(sortlist)):
@@ -114,49 +111,12 @@ def Compare(a, b):
         num = -1
     
     return num
-#will sort list by names
-    
-#test code
-#print ('Argument List:', str(sys.argv))
 
-
-#open file  but this seems to be readin whole file char by char
-#with open("e:\\names.txt", "rt") as in_file:
-#    text = in_file.read()
-
-#print(text)
-#print(text[3])
-#testname = name('Peter','Johnson', 78 )
-#open file line by line
-# **need to test 
-
-#infile = open("e:\\names.txt", 'r')
-
-#for line in infile:
-#    line.rstrip('\n') # strip carriage return
-#    line = line.split(',')
-#    line[2] = int(line[2])
-#    for l in line:
-#        print(l)
-    #print(line,  end='') # prints line without return
-#infile.Close()
-
-#print(testname.First)
-#print(testname.Last)
-#print(testname.Score)
 names = ProgramReadFile()
 names = SortNames(names, None) #sort by score
 names = SortNames(names, 1) #sort by surname
 names = SortNames(names, 2) #sort by first name
 WriteFile(names)
-
-
-
-#test print
-#for n in names:
-#    print(n.Last)
-#    print(n.First)
-#    print(n.Score)
 
 
 
