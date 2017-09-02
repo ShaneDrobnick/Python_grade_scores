@@ -3,11 +3,29 @@ import sys,  os.path
 
 def ProgramReadFile():
     names = []
-    infile = open(sys.argv[1], 'r')
+    #Check read File exists
+    try:
+        infile = open(sys.argv[1], 'r')
+    except IOError:
+        print('IOError Input file: '+ sys.argv[1] +' Not Found! - Exiting Program')
+        sys.exit(0)
+        
     for line in infile:
         line.rstrip('\n') # strip carriage return
         line = line.split(',')
-        line[2] = int(line[2])
+        #File formated with correct spliter
+        try:
+            if len(line) != 3:
+                raise Exception('FileFormatError Input file: '+ sys.argv[1] +' Incorrect Format of dividers - Exiting Program')
+        except Exception as error:
+                print(repr(error))
+                sys.exit(0)
+        # 3rd element is an integer?        
+        try:
+            line[2] = int(line[2])
+        except IndexError:
+            print('IndexError Input file: '+ sys.argv[1] +' Incorrect Format of Scores - Exiting Program')
+            sys.exit(0)
         #adding to name object
         n = name(str(line[1]), str(line[0]), str(line[2]))
         names.append(n)
@@ -30,7 +48,13 @@ def WriteFile(list):
     #print(path)
     filenamefull = path + filename[0] + '_python_graded.txt'
     #file = open('e:\\Python_graded.txt',  'w')
-    file = open( filenamefull,  'w')
+    
+    #Check file can be written too
+    try:
+        file = open( filenamefull,  'w')
+    except PermissionError:
+        print('Unable to write to output file: '+ filename[0] + '_python_graded.txt'+' Do not have permission to write to file - Exiting Program')
+        sys.exit(0)    
     
     
     for n in list:
