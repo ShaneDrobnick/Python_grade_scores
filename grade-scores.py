@@ -10,6 +10,9 @@ def ProgramReadFile():
     except IOError:
         print('IOError Input file: '+ sys.argv[1] +' Not Found! - Exiting Program')
         sys.exit(0)
+    except IndexError:
+        print('IndexError - File to open not given on command line - Exiting Program')
+        sys.exit(0)
         
     for line in infile:
         line.rstrip('\n') # strip carriage return
